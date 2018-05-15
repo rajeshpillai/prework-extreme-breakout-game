@@ -49,6 +49,7 @@ class Game {
             document.getElementById("canvas-wrapper").style.display = 'block';
             document.getElementById("canvas").style.display='block';
             //document.removeEventListener("keyup", this.handleEvents);
+             this.init();
              this.start();
         }
 
@@ -112,6 +113,7 @@ class Game {
             this.quitting = true;
             this.endGame();
             this.quitting = false;
+            this.inprogress = false;
             return;
         }
     }
