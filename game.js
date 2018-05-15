@@ -114,7 +114,7 @@ class Game {
             paddle.xVelocity = speed;
         } 
 
-        if (paddle.x > this.w) paddle.xVelocity = -speed;
+        if (paddle.x > this.w-paddle.w) paddle.xVelocity = -speed;
         if (paddle.x < 0) paddle.xVelocity = speed;
     }
 
