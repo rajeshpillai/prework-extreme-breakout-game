@@ -53,10 +53,9 @@ html, body {
 }
 
 .copyright {
-  margin: 0 auto;
+  margin: 40px auto;
   width:200px;
-  padding-top: 40px 10;
-  background-color: rgb(50,50,50);
+  -top: 60px;
 }
 
 .splash {
