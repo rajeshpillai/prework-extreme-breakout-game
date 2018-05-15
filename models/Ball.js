@@ -2,6 +2,13 @@ class Ball extends Entity {
     constructor(props) {
         super(props);
         this.r = props.r;
+        this.deltaX = -2;
+        this.deltaY = -4;
+    }
+
+    update() {
+        this.x = this.x + this.deltaX;
+        this.y = this.y + this.deltaY;
     }
 
     draw() {

@@ -1,6 +1,8 @@
 class Game {
     constructor(canvas) {
         this.canvas = canvas;
+        this.w = canvas.width;
+        this.h = canvas.height;
         this.ctx = canvas.getContext('2d');
         this.trialRun = false;
         this.gameLevel = 1;
@@ -85,6 +87,9 @@ class Game {
     }
 
     update() {
+        this.entities.forEach((entity => {
+            if (entity.update) entity.update();
+        }));
     }
 
     draw() {
