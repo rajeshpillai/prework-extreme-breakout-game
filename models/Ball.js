@@ -2,6 +2,8 @@ class Ball extends Entity {
     constructor(props) {
         super(props);
         this.r = props.r;
+        this.w = this.r * 2;
+        this.h = this.r * 2;
         this.xVelocity = -2;
         this.yVelocity = -4;
         this.type="ball";

@@ -62,7 +62,6 @@ class Game {
         // Convert the key code to key name
         let keyName = Game.keys[e.which];
         if (keyName) {
-            console.log(e.type);
             this.keyPressed[keyName] = (e.type === "keydown");
             e.preventDefault();
         }
@@ -113,6 +112,11 @@ class Game {
         } else if (this.keyPressed.right) {
             paddle.xVelocity = speed;
         } 
+
+        if (paddle.intersect(this.ball)) {
+            console.log("COLLIDE>..");
+            this.ball.yVelocity *= -1;
+        }
 
         if (paddle.x > this.w-paddle.w) paddle.xVelocity = -speed;
         if (paddle.x < 0) paddle.xVelocity = speed;
