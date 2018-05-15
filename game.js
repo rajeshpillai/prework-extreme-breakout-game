@@ -29,7 +29,6 @@ class Game {
         this.ball.loadSprite('./assets/pokeball.png');
 
         this.paddle = new Paddle({ctx: this.ctx, x:40,y:500,w:80,h:20});
-        this.score = new Score({ctx: this.ctx, x:0, y:575});
         this.wall = new Wall({
             ctx: this.ctx,
             x:0, 
@@ -40,7 +39,9 @@ class Game {
         
         this.bg = new Background();
 
-        this.entities = [this.ball, this.paddle, this.score, 
+        Score.init(this.ctx);
+
+        this.entities = [this.ball, this.paddle, 
                     this.wall, this.bg];
 
     }
@@ -143,6 +144,7 @@ class Game {
             if (!b.show) continue;
             if (b.intersect(ball)) {
                 console.log("BALL intersects BRICK..");
+                this.incrementScore();
                 b.show = false;
                 --this.wall.totalBricks;
             }
@@ -161,6 +163,16 @@ class Game {
         this.entities.forEach((entity => {
             if (entity.draw) entity.draw();
         }));
+
+        Score.update();
+    }
+
+    incrementScore() {
+        Score.increment(1);
+    }
+
+    decrementScore() {
+        Score.decrement(1);
     }
 
     clear() {
