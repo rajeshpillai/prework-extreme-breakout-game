@@ -29,18 +29,20 @@ html, body {
   color: black;
 }
 #canvas-wrapper {
-    width: 600px;
-     height:610px;
-     margin: 0px auto;
-     border: 2px solid rgb(50,50,50);
-     display: none;
+  box-sizing: border-box;
+  width: 600px;
+  height:600px;
+  margin: 5px auto;
+  display: none;
 }
 
 #canvas {
-	margin-top:10px;
+  box-sizing: border-box;
 	padding:0;
 	background-color: black;
-    display: none;
+  display: none;
+  border: 2px solid rgb(50,50,50);
+  
 }
 
 #game {
