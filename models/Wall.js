@@ -4,6 +4,7 @@ class Wall extends Entity {
         this.rows = 1;
         this.type="wall";
         this.bricksPerRow = props.bricksPerRow;
+        this.totalBricks = this.rows * this.bricksPerRow;
         this.bricks = [];
         this.init();
     }

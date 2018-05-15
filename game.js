@@ -90,6 +90,7 @@ class Game {
     }
 
     update() {
+        this.checkWinner();
         this.entities.forEach((entity => {
             if (entity.update) {
                 entity.update();
@@ -103,6 +104,16 @@ class Game {
                 }
             }
         }));
+    }
+
+    checkWinner() {
+        if (this.wall.totalBricks === 0) {
+            alert("You won!");
+            this.quitting = true;
+            this.endGame();
+            this.quitting = false;
+            return;
+        }
     }
 
     handlePaddle(paddle) {
@@ -123,6 +134,16 @@ class Game {
     }
 
     handleBall(ball) {
+        for(let i =0; i < this.wall.bricks.length; i++) {
+            let b = this.wall.bricks[i];
+            if (!b.show) continue;
+            if (b.intersect(ball)) {
+                console.log("BALL intersects BRICK..");
+                b.show = false;
+                --this.wall.totalBricks;
+            }
+        }
+
         if (ball.y > this.h - ball.h || ball.y < 0) {
             ball.yVelocity *= -1;
         }
@@ -130,13 +151,6 @@ class Game {
             ball.xVelocity *=-1;
         }
 
-        for(let i =0; i < this.wall.bricks.length; i++) {
-            let b = this.wall.bricks[i];
-            if (b.intersect(ball)) {
-                console.log("BALL intersects BRICK..");
-                b.show = false;
-            }
-        }
     }
 
     draw() {
@@ -173,3 +187,5 @@ Game.keys = {
 
 
 let game = new Game(document.getElementById("canvas"));
+
+window.game = game;  // For debugging purpose.
