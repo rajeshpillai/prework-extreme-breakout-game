@@ -107,11 +107,15 @@ class Game {
     }
 
     handlePaddle(paddle) {
+        let speed = 2;
         if (this.keyPressed.left) {
-            paddle.xVelocity *= -1;
+            paddle.xVelocity = -speed;
         } else if (this.keyPressed.right) {
-            paddle.xVelocity *= 1;
+            paddle.xVelocity = speed;
         } 
+
+        if (paddle.x > this.w) paddle.xVelocity = -speed;
+        if (paddle.x < 0) paddle.xVelocity = speed;
     }
 
     handleBall(ball) {

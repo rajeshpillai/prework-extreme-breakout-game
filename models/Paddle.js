@@ -4,11 +4,11 @@ class Paddle extends Entity {
         this.type="paddle";
         this.xVelocity = 2;
         this.speed = 2;
-        this.acceleration = 0.2;
+        this.acceleration = 0.1;
     }
 
     update() {
-        this.x += this.xVelocity * this.speed * this.acceleration;
+        this.x += (this.xVelocity + this.acceleration) * this.speed;
     }
     draw() {
         let ctx = this.ctx;
