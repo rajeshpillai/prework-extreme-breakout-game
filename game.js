@@ -44,7 +44,7 @@ class Game {
     }
 
     handleEvents(e) {
-        if (e.keyCode === 32) {  // space key
+        if (e.keyCode === 32 && !this.inprogress) {  // space key
             document.querySelector(".startup").style.display = "none";
             document.getElementById("canvas-wrapper").style.display = 'block';
             document.getElementById("canvas").style.display='block';
@@ -76,6 +76,7 @@ class Game {
     }
 
     start() {
+        this.inprogress = true;
         if (this.quitting) return;
         this.clear();
         this.gameLoop = window.requestAnimationFrame(this.start);
@@ -84,6 +85,7 @@ class Game {
     }
 
     endGame() {
+        this.inprogress = false;
         window.cancelAnimationFrame(this.gameLoop);
         this.showStartScreen();
     }
@@ -105,14 +107,11 @@ class Game {
     }
 
     handlePaddle(paddle) {
-        let speed = 2;
         if (this.keyPressed.left) {
-            paddle.xVelocity = -speed;
+            paddle.xVelocity *= -1;
         } else if (this.keyPressed.right) {
-            paddle.xVelocity = speed;
-        } else {
-            paddle.xVelocity = 0; // Stop the paddle
-        }
+            paddle.xVelocity *= 1;
+        } 
     }
 
     handleBall(ball) {
