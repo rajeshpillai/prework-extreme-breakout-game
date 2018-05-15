@@ -23,16 +23,23 @@ class Game {
         this.ball = new Ball({ctx:this.ctx, x:50, y:450, r:12});
         this.paddle = new Paddle({ctx: this.ctx, x:40,y:500,w:80,h:20});
         this.score = new Score({ctx: this.ctx, x:0, y:575});
-        this.wall = new Wall();
+        this.wall = new Wall({
+            ctx: this.ctx,
+            x:0, 
+            y:0,
+            w: this.canvas.width, 
+            bricksPerRow: 16,
+        });
+        
         this.bg = new Background();
 
-        this.entities = [this.ball, this.paddle, this.score, this.wall, this.bg];
+        this.entities = [this.ball, this.paddle, this.score, 
+                    this.wall, this.bg];
 
         console.log(this.entities);
     }
 
     handleEvents(e) {
-        console.log(e.which);
         if (e.keyCode === 32) {  // space key
             document.querySelector(".startup").style.display = "none";
             document.getElementById("canvas-wrapper").style.display = 'block';
@@ -43,7 +50,6 @@ class Game {
 
         if (e.keyCode === 81) {
             this.quitting = true;
-            console.log("QUIT...");
             this.endGame();
             this.quitting = false;
             return;
@@ -55,7 +61,6 @@ class Game {
         if (keyName) {
             this.keyPressed[keyName] = (e.type === "keydown");
             e.preventDefault();
-            console.log("KEY: ", this.keyPressed);
         }
     }
 
@@ -68,6 +73,7 @@ class Game {
 
     start() {
         if (this.quitting) return;
+        this.clear();
         this.gameLoop = window.requestAnimationFrame(this.start);
         this.update();
         this.draw();
@@ -79,15 +85,21 @@ class Game {
     }
 
     update() {
-        console.log("update...");
     }
 
     draw() {
-        console.log("drawing...");
         this.entities.forEach((entity => {
             if (entity.draw) entity.draw();
         }));
     }
+
+    clear() {
+        let ctx = this.ctx;
+        ctx.fillStyle = "black";
+        ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+        ctx.restore();
+    }
+
     
     pause () {
 

@@ -3,6 +3,7 @@ class Entity {
         if (props === undefined) {
             props = {};      
         }
+        this.show = props.show || true;
         this.x = props.x || 0;
         this.y = props.y || 0;
         this.w = props.w || 25;
