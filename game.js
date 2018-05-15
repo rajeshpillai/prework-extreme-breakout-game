@@ -11,7 +11,10 @@ class Game {
         this.entities = [];
         this.keyPressed = {};
         this.handleEvents = this.handleEvents.bind(this);
+        
+        document.addEventListener("keydown", this.handleEvents)
         document.addEventListener("keyup", this.handleEvents)
+
         this.init = this.init.bind(this);
         this.draw = this.draw.bind(this);
         this.pause = this.pause.bind(this);
@@ -59,6 +62,7 @@ class Game {
         // Convert the key code to key name
         let keyName = Game.keys[e.which];
         if (keyName) {
+            console.log(e.type);
             this.keyPressed[keyName] = (e.type === "keydown");
             e.preventDefault();
         }
@@ -91,9 +95,24 @@ class Game {
                 switch(entity.type) {
                     case "ball":
                         this.handleBall(entity);
+                        return;
+                    case "paddle":
+                        this.handlePaddle(entity);
+                        break;
                 }
             }
         }));
+    }
+
+    handlePaddle(paddle) {
+        let speed = 2;
+        if (this.keyPressed.left) {
+            paddle.xVelocity = -speed;
+        } else if (this.keyPressed.right) {
+            paddle.xVelocity = speed;
+        } else {
+            paddle.xVelocity = 0; // Stop the paddle
+        }
     }
 
     handleBall(ball) {
