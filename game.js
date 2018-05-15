@@ -129,6 +129,14 @@ class Game {
         if (ball.x > this.w - ball.w || ball.x < 0) {
             ball.xVelocity *=-1;
         }
+
+        for(let i =0; i < this.wall.bricks.length; i++) {
+            let b = this.wall.bricks[i];
+            if (b.intersect(ball)) {
+                console.log("BALL intersects BRICK..");
+                b.show = false;
+            }
+        }
     }
 
     draw() {
