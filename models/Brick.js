@@ -1,6 +1,7 @@
 class Brick extends Entity {
     constructor(props) {
         super(props) ;
+        this.type="brick";
     }   
 
     draw() {

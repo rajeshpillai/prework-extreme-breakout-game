@@ -1,6 +1,7 @@
 class Paddle extends Entity {
     constructor(props) {
         super(props);
+        this.type="paddle";
     }
     draw() {
         let ctx = this.ctx;

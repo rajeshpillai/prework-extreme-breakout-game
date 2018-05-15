@@ -2,6 +2,7 @@ class Wall extends Entity {
     constructor(props) {
         super(props);
         this.rows = 1;
+        this.type="wall";
         this.bricksPerRow = props.bricksPerRow;
         this.bricks = [];
         this.init();
@@ -18,14 +19,11 @@ class Wall extends Entity {
                 this.bricks.push(b);
             }
         }
-
-        console.log("bricks: ", this.bricks);
     }
 
     draw () {
         for(let i =0; i < this.bricks.length; i++) {
             let b = this.bricks[i];
-            console.log("Drawing brick: ", b);
             b.draw();
         }
     }

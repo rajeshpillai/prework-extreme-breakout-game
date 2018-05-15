@@ -38,7 +38,6 @@ class Game {
         this.entities = [this.ball, this.paddle, this.score, 
                     this.wall, this.bg];
 
-        console.log(this.entities);
     }
 
     handleEvents(e) {
@@ -59,7 +58,6 @@ class Game {
 
         // Convert the key code to key name
         let keyName = Game.keys[e.which];
-        console.log("keyName: ", keyName);
         if (keyName) {
             this.keyPressed[keyName] = (e.type === "keydown");
             e.preventDefault();
@@ -88,8 +86,23 @@ class Game {
 
     update() {
         this.entities.forEach((entity => {
-            if (entity.update) entity.update();
+            if (entity.update) {
+                entity.update();
+                switch(entity.type) {
+                    case "ball":
+                        this.handleBall(entity);
+                }
+            }
         }));
+    }
+
+    handleBall(ball) {
+        if (ball.y > this.h - ball.h || ball.y < 0) {
+            ball.yVelocity *= -1;
+        }
+        if (ball.x > this.w - ball.w || ball.x < 0) {
+            ball.xVelocity *=-1;
+        }
     }
 
     draw() {

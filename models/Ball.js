@@ -2,17 +2,17 @@ class Ball extends Entity {
     constructor(props) {
         super(props);
         this.r = props.r;
-        this.deltaX = -2;
-        this.deltaY = -4;
+        this.xVelocity = -2;
+        this.yVelocity = -4;
+        this.type="ball";
     }
 
     update() {
-        this.x = this.x + this.deltaX;
-        this.y = this.y + this.deltaY;
+        this.x = this.x + this.xVelocity;
+        this.y = this.y + this.yVelocity;
     }
 
     draw() {
-        console.log("ball:draw:", this.x, this.y);
         let ctx = this.ctx;
         ctx.save();
 
