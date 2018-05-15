@@ -26,6 +26,8 @@ class Game {
 
     init () {
         this.ball = new Ball({ctx:this.ctx, x:50, y:450, r:12});
+        this.ball.loadSprite('./assets/pokeball.png');
+
         this.paddle = new Paddle({ctx: this.ctx, x:40,y:500,w:80,h:20});
         this.score = new Score({ctx: this.ctx, x:0, y:575});
         this.wall = new Wall({

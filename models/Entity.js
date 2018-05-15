@@ -15,6 +15,13 @@ class Entity {
         this.yVelocity = 0;
     }
 
+    loadSprite(url) {
+        this.sprite = new Image();
+        this.sprite.onload = function () {
+        }
+        this.sprite.src = url;
+    }
+
     update() {
 
     }
