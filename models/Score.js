@@ -14,13 +14,11 @@ var Score = {
 	},
 	increment: function (score) {
 		this.points += score;
-		this.update();
 	},
 	decrement: function (score) {
 		this.points -= score;
-		this.update();
 	},
-	update: function () {
+	draw: function () {
 		this.clear();
 		this.ctx.save();
 		this.ctx.font = "12pt Geo";

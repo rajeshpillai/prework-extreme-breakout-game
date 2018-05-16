@@ -27,6 +27,7 @@ class Game {
     init () {
         this.ball = new Ball({ctx:this.ctx, x:50, y:450, r:12});
         this.ball.loadSprite('./assets/pokeball.png');
+        this.score = Score;
 
         this.paddle = new Paddle({ctx: this.ctx, x:40,y:500,w:80,h:20});
         this.wall = new Wall({
@@ -42,7 +43,7 @@ class Game {
         Score.init(this.ctx);
 
         this.entities = [this.ball, this.paddle, 
-                    this.wall, this.bg];
+                    this.wall, this.score, this.bg];
 
     }
 
@@ -163,8 +164,6 @@ class Game {
         this.entities.forEach((entity => {
             if (entity.draw) entity.draw();
         }));
-
-        Score.update();
     }
 
     incrementScore() {
