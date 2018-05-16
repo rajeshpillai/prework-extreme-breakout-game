@@ -10,7 +10,7 @@ class Brick extends Entity {
         let ctx = this.ctx;
         ctx.save();
 
-        ctx.fillStyle = "brown";
+        ctx.fillStyle = "#FF4848";
         ctx.fillRect(this.x,this.y,this.w, this.h);
         ctx.strokeRect(this.x, this.y, this.w,this.h);
         ctx.restore();
