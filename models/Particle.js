@@ -30,6 +30,6 @@ class Particle {
     }
 
     finished() {
-        return this.alpha < 0;
+        return this.alpha < 0.1;
     }
 }
