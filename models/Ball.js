@@ -23,7 +23,7 @@ class Ball extends Entity {
 
         if (this.sprite) {
             ctx.save();
-            ctx.translate(this.x+this.w/2, this.y)+this.h/2;
+            ctx.translate(this.x+this.w/2, this.y+this.h/2);
             ctx.rotate(this.startAngle * Math.PI/180);
             //ctx.drawImage(this.sprite, this.x, this.y, this.r * 2, this.r * 2);
             ctx.drawImage(this.sprite, -this.w/2, -this.h/2, this.r*2, this.r*2);
