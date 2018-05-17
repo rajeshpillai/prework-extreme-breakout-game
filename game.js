@@ -134,18 +134,18 @@ class Game {
     handlePaddle(paddle) {
         let speed = 2;
         if (this.keyPressed.left) {
-            paddle.xVelocity = -speed;
+            paddle.vx = -speed;
         } else if (this.keyPressed.right) {
-            paddle.xVelocity = speed;
+            paddle.vx = speed;
         } 
 
         if (paddle.intersect(this.ball)) {
             console.log("COLLIDE>..");
-            this.ball.yVelocity *= -1;
+            this.ball.vy *= -1;
         }
 
-        if (paddle.x > this.w-paddle.w) paddle.xVelocity = -speed;
-        if (paddle.x < 0) paddle.xVelocity = speed;
+        if (paddle.x > this.w-paddle.w) paddle.vx = -speed;
+        if (paddle.x < 0) paddle.vx = speed;
     }
 
     handleBall(ball) {
@@ -162,10 +162,10 @@ class Game {
         }
 
         if (ball.y > this.h - ball.h || ball.y < 0) {
-            ball.yVelocity *= -1;
+            ball.vy *= -1;
         }
         if (ball.x > this.w - ball.w || ball.x < 0) {
-            ball.xVelocity *=-1;
+            ball.vx *=-1;
         }
 
     }

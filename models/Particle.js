@@ -10,7 +10,7 @@ class Particle {
         this.vy = random(-5,5);
 
         this.ctx = ctx;
-        this.ball = new Box({ctx: this.ctx, x:this.x, y: this.y, w:2,h:2});
+        this.ball = new Box({ctx: this.ctx, x:this.x, y: this.y, w:4,h:4});
         this.ball.fillStyle= fill;
         this.alpha = 1;
     }

@@ -2,13 +2,13 @@ class Paddle extends Entity {
     constructor(props) {
         super(props);
         this.type="paddle";
-        this.xVelocity = 1.5;
+        this.vx = 1.5;
         this.speed = 2;
         this.acceleration = 0.1;
     }
 
     update() {
-        this.x += (this.xVelocity + this.acceleration) * this.speed;
+        this.x += (this.vx + this.acceleration) * this.speed;
     }
     draw() {
         let ctx = this.ctx;

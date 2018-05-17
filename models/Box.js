@@ -1,16 +1,16 @@
 class Box extends Entity {
     constructor(props) {
         super(props);
-        this.xVelocity = -2;
-        this.yVelocity = -4;
+        this.vx = -2;
+        this.vy = -4;
         this.type="box";
         this.strokeStyle="white";
         this.fillStyle="red"; //todo
     }
 
     update() {
-        this.x = this.x + this.xVelocity;
-        this.y = this.y + this.yVelocity;
+        this.x = this.x + this.vx;
+        this.y = this.y + this.vy;
     }
 
     draw() {

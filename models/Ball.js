@@ -4,16 +4,16 @@ class Ball extends Entity {
         this.r = props.r;
         this.w = this.r * 2;
         this.h = this.r * 2;
-        this.xVelocity = -2;
-        this.yVelocity = -4;
+        this.vx = -2;
+        this.vy = -4;
         this.type="ball";
         this.strokeStyle="white";
         this.fillStyle="red"; //todo
     }
 
     update() {
-        this.x = this.x + this.xVelocity;
-        this.y = this.y + this.yVelocity;
+        this.x = this.x + this.vx;
+        this.y = this.y + this.vy;
     }
 
     draw() {

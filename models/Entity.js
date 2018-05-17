@@ -11,8 +11,8 @@ class Entity {
         this.ctx = props.ctx;
 
         // Velocity: Speed with direction
-        this.xVelocity = 0;
-        this.yVelocity = 0;
+        this.vx = 0;
+        this.vy = 0;
     }
 
     loadSprite(url) {
