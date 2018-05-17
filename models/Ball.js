@@ -7,6 +7,8 @@ class Ball extends Entity {
         this.xVelocity = -2;
         this.yVelocity = -4;
         this.type="ball";
+        this.strokeStyle="white";
+        this.fillStyle="red"; //todo
     }
 
     update() {
@@ -23,8 +25,8 @@ class Ball extends Entity {
         } else {
             ctx.beginPath();
             ctx.lineWidth = 1;
-            ctx.strokeStyle="white";
-            ctx.fillStyle="red"; //todo
+            ctx.strokeStyle=this.strokeStyle;
+            ctx.fillStyle= this.fillStyle;
             ctx.arc(this.x, this.y, this.r, 0, 2* Math.PI, true);
             ctx.stroke();
             ctx.fill();

@@ -2,6 +2,7 @@ class Brick extends Entity {
     constructor(props) {
         super(props) ;
         this.type="brick";
+        this.fillStyle = "#FF4848";
     }   
 
     draw() {
@@ -10,7 +11,7 @@ class Brick extends Entity {
         let ctx = this.ctx;
         ctx.save();
 
-        ctx.fillStyle = "#FF4848";
+        ctx.fillStyle = this.fillStyle;
         ctx.fillRect(this.x,this.y,this.w, this.h);
         ctx.strokeRect(this.x, this.y, this.w,this.h);
         ctx.restore();

@@ -28,6 +28,8 @@ class Game {
         this.ball = new Ball({ctx:this.ctx, x:50, y:450, r:12});
         this.ball.loadSprite('./assets/pokeball.png');
         this.score = Score;
+        this.particles = [];
+        
 
         this.paddle = new Paddle({ctx: this.ctx, x:40,y:500,w:80,h:20});
         this.wall = new Wall({
@@ -45,6 +47,13 @@ class Game {
         this.entities = [this.ball, this.paddle, 
                     this.wall, this.score, this.bg];
 
+    }
+
+    setupParticles(b) {
+        for(let i = 0; i < 25; i++)  {
+            let p = new Particle(this.ctx, b.x, b.y + b.h, b.fillStyle);
+            this.particles.push(p);
+        }
     }
 
     handleEvents(e) {
@@ -144,7 +153,8 @@ class Game {
             let b = this.wall.bricks[i];
             if (!b.show) continue;
             if (b.intersect(ball)) {
-                console.log("BALL intersects BRICK..");
+                this.explode = true;
+                this.setupParticles(b);
                 this.incrementScore();
                 b.show = false;
                 --this.wall.totalBricks;
@@ -164,6 +174,20 @@ class Game {
         this.entities.forEach((entity => {
             if (entity.draw) entity.draw();
         }));
+
+        if (this.explode) {
+            this.explodeBricks();
+        }
+    }
+
+    explodeBricks() {
+        for(let i = this.particles.length-1; i>=0; i--) {
+            this.particles[i].update();
+            this.particles[i].show();
+            if (this.particles[i].finished()) {
+                this.particles.splice(i,1);
+            }
+        }
     }
 
     incrementScore() {
