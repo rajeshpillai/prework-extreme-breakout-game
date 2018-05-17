@@ -14,7 +14,9 @@ class Paddle extends Entity {
         let ctx = this.ctx;
         ctx.save();
         ctx.fillStyle = "yellow";
-        ctx.fillRect(this.x, this.y, this.w, this.h);
+        ctx.strokeStyle="white";
+        //ctx.fillRect(this.x, this.y, this.w, this.h);
+        ctx.strokeRect(this.x, this.y, this.w, this.h);
         ctx.restore();
     }
 }
