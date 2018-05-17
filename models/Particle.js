@@ -7,7 +7,7 @@ class Particle {
         this.x = x;
         this.y = y;
         this.vx = random(-1,1);
-        this.vy = random(-5,-1);
+        this.vy = random(-5,5);
 
         this.ctx = ctx;
         this.ball = new Box({ctx: this.ctx, x:this.x, y: this.y, w:2,h:2});
