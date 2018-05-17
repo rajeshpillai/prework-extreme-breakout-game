@@ -14,6 +14,7 @@ class Game {
         
         document.addEventListener("keydown", this.handleEvents)
         document.addEventListener("keyup", this.handleEvents)
+        document.getElementById("btnContinue").addEventListener("click", ()=> this.onContinue());
 
         this.init = this.init.bind(this);
         this.draw = this.draw.bind(this);
@@ -56,14 +57,24 @@ class Game {
         }
     }
 
+    onContinue () {
+        if (!this.inprogress) {  // space key
+            this.startGame();
+        }
+    }
+
     handleEvents(e) {
+        console.log(e);
+        // Convert the key code to key name
+        let keyName = Game.keys[e.which];
+        
+        if (keyName) {
+            this.keyPressed[keyName] = (e.type === "keydown");
+            e.preventDefault();
+        }
+
         if (e.keyCode === 32 && !this.inprogress) {  // space key
-            document.querySelector(".startup").style.display = "none";
-            document.getElementById("canvas-wrapper").style.display = 'block';
-            document.getElementById("canvas").style.display='block';
-            //document.removeEventListener("keyup", this.handleEvents);
-             this.init();
-             this.start();
+            this.startGame();
         }
 
         if (e.keyCode === 81) {
@@ -73,12 +84,16 @@ class Game {
             return;
         }
 
-        // Convert the key code to key name
-        let keyName = Game.keys[e.which];
-        if (keyName) {
-            this.keyPressed[keyName] = (e.type === "keydown");
-            e.preventDefault();
-        }
+        
+    }
+
+    startGame() {
+        document.querySelector(".startup").style.display = "none";
+        document.getElementById("canvas-wrapper").style.display = 'block';
+        document.getElementById("canvas").style.display = 'block';
+        //document.removeEventListener("keyup", this.handleEvents);
+        this.init();
+        this.start();
     }
 
     showStartScreen() {
