@@ -15,6 +15,7 @@ class Game {
         document.addEventListener("keydown", this.handleEvents)
         document.addEventListener("keyup", this.handleEvents)
         document.getElementById("btnContinue").addEventListener("click", ()=> this.onContinue());
+        window.addEventListener('resize', this.resize, false);
 
         this.init = this.init.bind(this);
         this.draw = this.draw.bind(this);
@@ -24,6 +25,41 @@ class Game {
         this.start = this.start.bind(this);
         this.init();
     }
+    
+    resize() {
+        // Our canvas must cover full height of screen
+        // regardless of the resolution
+        let height = window.innerHeight;
+        let canvas = this.canvas;
+        
+        // So we need to calculate the proper scaled width
+        // that should work well with every resolution
+        let ratio = canvas.width/canvas.height;
+        let width = height * ratio;
+        
+        canvas.style.width = width+'px';
+        canvas.style.height = height+'px';
+    }
+
+    // Resize according to ratio
+    resizeToRatio() {
+        let canvas = this.canvas;
+        var canvasRatio = canvas.height / canvas.width;
+        var windowRatio = window.innerHeight / window.innerWidth;
+        var width;
+        var height;
+    
+        if (windowRatio < canvasRatio) {
+            height = window.innerHeight;
+            width = height / canvasRatio;
+        } else {
+            width = window.innerWidth;
+            height = width * canvasRatio;
+        }
+    
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+    };
 
     init () {
         this.ball = new Ball({ctx:this.ctx, x:50, y:450, r:12});

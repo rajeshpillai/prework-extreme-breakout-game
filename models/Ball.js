@@ -7,6 +7,7 @@ class Ball extends Entity {
         this.vx = -2;
         this.vy = -4;
         this.type="ball";
+        this.startAngle = 0;
         this.strokeStyle="white";
         this.fillStyle="red"; //todo
     }
@@ -18,11 +19,17 @@ class Ball extends Entity {
 
     draw() {
         let ctx = this.ctx;
-        ctx.save();
+        
 
         if (this.sprite) {
-            ctx.drawImage(this.sprite, this.x, this.y, this.r * 2, this.r * 2);
+            ctx.save();
+            ctx.translate(this.x+this.w/2, this.y)+this.h/2;
+            ctx.rotate(this.startAngle * Math.PI/180);
+            //ctx.drawImage(this.sprite, this.x, this.y, this.r * 2, this.r * 2);
+            ctx.drawImage(this.sprite, -this.w/2, -this.h/2, this.r*2, this.r*2);
+            ctx.restore();
         } else {
+            ctx.save();
             ctx.beginPath();
             ctx.lineWidth = 1;
             ctx.strokeStyle=this.strokeStyle;
@@ -30,9 +37,10 @@ class Ball extends Entity {
             ctx.arc(this.x, this.y, this.r, 0, 2* Math.PI, true);
             ctx.stroke();
             ctx.fill();
+            ctx.restore();
         }
-
-        ctx.restore();
+        this.startAngle++;
+        
 
     }
 }
