@@ -1,7 +1,7 @@
 class Wall extends Entity {
     constructor(props) {
         super(props);
-        this.rows = 1;
+        this.rows = props.rows || 1;
         this.type="wall";
         this.bricksPerRow = props.bricksPerRow;
         this.totalBricks = this.rows * this.bricksPerRow;
@@ -11,14 +11,16 @@ class Wall extends Entity {
 
     init() {
         let brickWidth = this.w / this.bricksPerRow;
-
+        let y = 0;
         for(let r = 0; r < this.rows; r++) {
             for(let c = 0; c < this.bricksPerRow; c++) {
                 let b = new Brick({ctx: this.ctx, x:0, w:brickWidth, h:25});
                 b.x += b.w * c;
-                b.y = 0;
+                b.y = y;
                 this.bricks.push(b);
             }
+            y += 25;
+
         }
     }
 

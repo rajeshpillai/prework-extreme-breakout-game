@@ -41,26 +41,6 @@ class Game {
         canvas.style.height = height+'px';
     }
 
-    // Resize according to ratio
-    resizeToRatio() {
-        let canvas = this.canvas;
-        var canvasRatio = canvas.height / canvas.width;
-        var windowRatio = window.innerHeight / window.innerWidth;
-        var width;
-        var height;
-    
-        if (windowRatio < canvasRatio) {
-            height = window.innerHeight;
-            width = height / canvasRatio;
-        } else {
-            width = window.innerWidth;
-            height = width * canvasRatio;
-        }
-    
-        canvas.style.width = width + 'px';
-        canvas.style.height = height + 'px';
-    };
-
     init () {
         this.ball = new Ball({ctx:this.ctx, x:50, y:450, r:12});
         this.ball.loadSprite('./assets/pokeball.png');
@@ -69,12 +49,24 @@ class Game {
         
 
         this.paddle = new Paddle({ctx: this.ctx, x:40,y:500,w:80,h:20});
+
+        switch(this.gameLevel) {
+            case 1:
+                this.brickRows = 1;
+                break;
+            case 2:
+                this.brickRows = 2;
+                break;
+            default:
+                this.brickRows = 1;
+        }
         this.wall = new Wall({
             ctx: this.ctx,
             x:0, 
             y:0,
             w: this.canvas.width, 
             bricksPerRow: 16,
+            rows: this.brickRows
         });
         
         this.bg = new Background();
@@ -178,6 +170,10 @@ class Game {
             this.endGame();
             this.quitting = false;
             this.inprogress = false;
+            this.gameLevel++;
+            if (this.gameLevel > 2) {
+                this.gameLevel = 1;
+            }
             return;
         }
     }
@@ -192,6 +188,7 @@ class Game {
 
         if (paddle.intersect(this.ball)) {
             console.log("COLLIDE>..");
+            paddle.collide = true;
             this.ball.vy *= -1;
         }
 
